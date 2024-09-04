@@ -1,0 +1,54 @@
+<% layout('./layouts/boilerplate') %>
+<div class="container mt-5">
+    <h1 class="mb-4 text-center">Thêm Sản Phẩm Mới</h1>
+    <!-- Thêm enctype="multipart/form-data" để hỗ trợ upload file -->
+    <form action="/products" method="POST" enctype="multipart/form-data" novalidate>
+        <div class="mb-3">
+            <label for="brand" class="form-label">Hãng Sản Xuất:</label>
+            <input type="text" class="form-control" id="brand" name="product[brand]"
+                placeholder="Nhập hãng sản xuất" required>
+            <div class="invalid-feedback">
+                Vui lòng nhập hãng sản xuất.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="model" class="form-label">Model:</label>
+            <input type="text" class="form-control" id="model" name="product[model]" placeholder="Nhập model"
+                required>
+            <div class="invalid-feedback">
+                Vui lòng nhập model.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="price2" class="form-label">Giá:</label>
+            <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input type="number" class="form-control" id="price2" name="product[price]" placeholder="Nhập giá"
+                    required min="0" step="0.01">
+            </div>
+            <div class="invalid-feedback">
+                Vui lòng nhập giá hợp lệ (phải là số dương).
+            </div>
+        </div>
+
+        <!-- Thêm input để chọn nhiều file ảnh -->
+        <div class="mb-3">
+            <label for="images" class="form-label">Ảnh Sản Phẩm:</label>
+            <input type="file" class="form-control" id="images" name="image" multiple required>
+            <div class="invalid-feedback">
+                Vui lòng chọn ít nhất một ảnh.
+            </div>
+            <!-- Thêm phần tử để hiển thị tên file -->
+            <div id="file-names-container" class="mt-2" style="display: none;">
+                <p class="mb-2">Danh sách các ảnh đã chọn:</p>
+                <ul id="file-names" class="list-group">
+                    <!-- Tên file sẽ được thêm vào đây -->
+                </ul>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Thêm Mới</button>
+    </form>
+</div>

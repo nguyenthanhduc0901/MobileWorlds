@@ -1,0 +1,71 @@
+<% layout('./layouts/boilerplate') %>
+<h1>Mobile</h1>
+
+<div class="container mt-5">
+    <!-- Form lọc sản phẩm theo brand -->
+    <form action="/products" method="get" class="mb-4">
+        <div class="input-group">
+            <select name="brand" class="form-select">
+                <option value="">All Brands</option>
+                <option value="Oppo">Oppo</option>
+                <option value="Samsung">Samsung</option>
+                <!-- Thêm các options cho các brand khác -->
+            </select>
+            <button class="btn btn-primary" type="submit">Filter</button>
+        </div>
+    </form>
+
+    <div class="row">
+        <% for (let i = 0; i < products.length; i++) { %>
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card h-100 d-flex flex-column">
+                    <!-- ID carousel dựa trên chỉ số i -->
+                    <div id="carousel<%= i %>" class="carousel slide">
+                        <div class="carousel-inner">
+                            <% products[i].images.forEach((image, index) => { %>
+                                <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+                                    <img src="<%= image.url %>" class="d-block w-100" alt="..." style="height: 300px; object-fit: cover;">
+                                </div>
+                            <% }) %>
+                        </div>
+                        <% if (products[i].images.length > 1) { %>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel<%= i %>" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carousel<%= i %>" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        <% } %>
+                    </div>
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title mb-2">
+                            <%= products[i].model %>
+                        </h5>
+                        <p class="card-text mb-4">$<%= products[i].price %></p>
+                        <a href="/products/<%= products[i]._id %>" class="btn btn-primary mt-auto">View Details</a>
+                    </div>
+                </div>
+            </div>
+
+            <% if ((i + 1) % 4 === 0) { %>
+                </div>
+                <div class="row">
+            <% } %>
+        <% } %>
+    </div>
+    <!-- products/index.ejs -->
+<% if (totalPages > 1) { %>
+    <nav aria-label="Page navigation">
+      <ul class="pagination">
+        <% for (let i = 1; i <= totalPages; i++) { %>
+          <li class="page-item <%= i === currentPage ? 'active' : '' %>">
+            <a class="page-link" href="?page=<%= i %>"><%= i %></a>
+          </li>
+        <% } %>
+      </ul>
+    </nav>
+  <% } %>
+  
+</div>

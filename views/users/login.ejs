@@ -1,0 +1,24 @@
+<% layout('./layouts/boilerplate') %>
+
+<div class="container mt-5">
+    <h1 class="mb-4 text-center">Đăng nhập</h1>
+    <form action="/login" method="POST" novalidate>
+        <div class="mb-3">
+            <label for="username" class="form-label">Tên đăng nhập:</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Nhập tên đăng nhập" required>
+            <div class="invalid-feedback">
+                Vui lòng nhập tên đăng nhập.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Mật khẩu:</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Nhập mật khẩu" required>
+            <div class="invalid-feedback">
+                Vui lòng nhập mật khẩu.
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
+    </form>
+</div>

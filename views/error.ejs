@@ -1,0 +1,16 @@
+<% layout('./layouts/boilerplate') %>
+<div class="container mt-5">
+    <div class="alert alert-danger" role="alert">
+        <h4 class="alert-heading">Error <%= statusCode %> - <%= message %></h4>
+        <% if (details.error) { %>
+            <p><strong>Details:</strong> <%= details.error %></p>
+        <% } %>
+        <% if (stack) { %>
+            <hr>
+            <p class="mb-0"><strong>Stack Trace:</strong></p>
+            <pre><%= stack %></pre>
+        <% } %>
+        <hr>
+        <a href="/" class="btn btn-primary">Back to Home</a>
+    </div>
+</div>

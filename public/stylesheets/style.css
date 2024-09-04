@@ -1,0 +1,40 @@
+.star-rating {
+  display: flex;
+  gap: 5px;
+  direction: rtl; /* Đảo ngược thứ tự ngôi sao */
+}
+
+.star-rating input[type="radio"] {
+  display: none;
+}
+
+.star-rating label {
+  font-size: 2rem;
+  color: #ddd;
+  cursor: pointer;
+}
+
+/* Hiệu ứng khi rê chuột qua các ngôi sao */
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: #ffc107;
+}
+
+/* Hiệu ứng khi chọn một ngôi sao */
+.star-rating input[type="radio"]:checked ~ label {
+  color: #ffc107;
+}
+
+/* Đảm bảo tất cả các ngôi sao từ ngôi sao đã chọn đều sáng lên */
+.star-rating input[type="radio"]:checked ~ input[type="radio"] ~ label {
+  color: #ddd;
+}
+
+/* Đảm bảo các ngôi sao trước ngôi sao đã chọn không sáng lên */
+.star-rating input[type="radio"]:checked ~ label {
+  color: #ffc107;
+}
+
+.star-rating input[type="radio"]:checked ~ label ~ label {
+  color: #ddd;
+}

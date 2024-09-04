@@ -1,0 +1,57 @@
+<% layout('./layouts/boilerplate') %>
+<div class="container mt-5">
+    <h1 class="mb-4 text-center">Sửa Sản Phẩm</h1>
+    <!-- Thêm enctype="multipart/form-data" để hỗ trợ upload file -->
+    <form action="/products/<%= product._id %>?_method=PUT" method="POST" enctype="multipart/form-data" novalidate>
+        <div class="mb-3">
+            <label for="brand" class="form-label">Hãng Sản Xuất:</label>
+            <input type="text" class="form-control" id="brand" name="product[brand]" placeholder="Nhập hãng sản xuất" value="<%= product.brand %>" required>
+            <div class="invalid-feedback">
+                Vui lòng nhập hãng sản xuất.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="model" class="form-label">Model:</label>
+            <input type="text" class="form-control" id="model" name="product[model]" placeholder="Nhập model" value="<%= product.model %>" required>
+            <div class="invalid-feedback">
+                Vui lòng nhập model.
+            </div>
+        </div>
+        
+        <div class="mb-3">
+            <label for="price" class="form-label">Giá:</label>
+            <div class="input-group">
+                <span class="input-group-text">$</span>
+                <input type="number" class="form-control" id="price" name="product[price]" placeholder="Nhập giá" value="<%= product.price %>" required min="0" step="0.01">
+            </div>
+            <div class="invalid-feedback">
+                Vui lòng nhập giá hợp lệ (phải là số dương).
+            </div>
+        </div>
+
+        <!-- Thêm input để chọn nhiều file ảnh -->
+        <div class="mb-3">
+            <label for="images" class="form-label">Ảnh Sản Phẩm:</label>
+            <input type="file" class="form-control" id="images" name="image" multiple>
+            <div class="invalid-feedback">
+                Vui lòng chọn ít nhất một ảnh.
+            </div>
+
+            <!-- Danh sách các ảnh hiện tại -->
+            <div id="current-images" class="mt-2">
+                <p class="mb-2">Danh sách các ảnh hiện tại:</p>
+                <ul class="list-group">
+                    <% product.images.forEach(img => { %>
+                        <li class="list-group-item">
+                            <img src="<%= img.url %>" alt="Image" class="img-thumbnail" style="width: 100px;">
+                            <input type="checkbox" name="deleteImages[]" value="<%= img.filename %>"> Xóa
+                        </li>
+                    <% }) %>
+                </ul>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Sửa</button>
+    </form>
+</div>
